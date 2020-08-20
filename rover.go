@@ -31,6 +31,26 @@ type Rover struct {
 }
 
 func (r *Rover) Explore() error {
+	for _, command := range r.Commands {
+		instruction := Instruction(command)
+		switch instruction {
+		case Move:
+			if err := r.move(); err != nil {
+				return err
+			}
+		case TurnLeft:
+			if err := r.turn(instruction); err != nil {
+				return err
+			}
+		case TurnRight:
+			if err := r.turn(instruction); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf("rover provided unknown Instruction{%d}", instruction)
+		}
+	}
+
 	return nil
 }
 
