@@ -4,6 +4,7 @@ import "fmt"
 
 type Direction uint8
 
+//go:generate stringer -type=Direction
 const (
 	UnknownDirection Direction = iota
 	North
@@ -19,5 +20,14 @@ func errUnknownDirection(d Direction) error {
 }
 
 func (d Direction) Valid() error {
+	switch d {
+	case North:
+	case East:
+	case South:
+	case West:
+	default:
+		return errUnknownDirection(d)
+	}
+
 	return nil
 }

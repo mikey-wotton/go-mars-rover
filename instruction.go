@@ -1,5 +1,7 @@
 package rover
 
+import "fmt"
+
 type Instruction int32
 
 const (
@@ -9,5 +11,13 @@ const (
 )
 
 func (i Instruction) Valid() error {
+	switch i {
+	case Move:
+	case TurnLeft:
+	case TurnRight:
+	default:
+		return fmt.Errorf("rover provided unknown Instruction{%d}", i)
+	}
+
 	return nil
 }
