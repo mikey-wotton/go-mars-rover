@@ -22,6 +22,8 @@ const (
 	numRoverInitValues = 3 //X, Y, and Direction
 )
 
+//ParseInstructions takes in a string and returns a slice of rovers with the provided positions and instructions.
+//If it encounters any error in parsing the string, it will return an error stating so and not continue to the next rover.
 func ParseInstructions(input string) (rover.Rovers, error) {
 	scanner := bufio.NewScanner(strings.NewReader(input))
 

@@ -19,17 +19,22 @@ var (
 
 type Rovers []*Rover
 
+//Position details the location and direction a Rover is on Mars.
 type Position struct {
 	Coordinate
 	Direction
 }
 
+
+//Rover represents a rover which is used to explore the Mars surface.
 type Rover struct {
 	Commands string
 	Position *Position
 	Boundary *Coordinate
 }
 
+//Explore is used to execute the instructions that belong to the rover, allowing it to traverse the Mars surface
+//up to its boundaries, if the Rover cannot perform an instruction it will return an error.
 func (r *Rover) Explore() error {
 	for _, command := range r.Commands {
 		instruction := Instruction(command)
@@ -54,6 +59,8 @@ func (r *Rover) Explore() error {
 	return nil
 }
 
+//Valid will return an error if the Rover is in a non-valid state, such as out of boundaries or facing an unknown
+//direction.
 func (r *Rover) Valid() error {
 	if r == nil {
 		return ErrRoverNotInitialised

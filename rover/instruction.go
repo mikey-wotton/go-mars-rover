@@ -2,6 +2,7 @@ package rover
 
 import "fmt"
 
+//Instruction represents the available movements a Rover can perform.
 type Instruction int32
 
 const (
@@ -10,6 +11,7 @@ const (
 	TurnRight Instruction = 'R'
 )
 
+//Valid will return an error if the current Instruction is not one of the three available Rover Instructions.
 func (i Instruction) Valid() error {
 	switch i {
 	case Move:
