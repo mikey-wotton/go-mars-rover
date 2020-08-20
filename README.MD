@@ -1,46 +1,61 @@
-#How to run
-To run the exe:
-```
-cd go-mars-rover/
-go build
-go-mars-rover.exe
-```
-To run the code:
-```
-cd go-mars-rover/
-go get ./...
-go run main.go
-```
-To run unit tests:
-```
-cd go-mars-rover/
-go test ./...
-```
-To generate and view code coverage:
-```
-cd go-mars-rover/
-go test -coverprofile=coverage.out
-go tool cover -html=coverage.out
-```
+# The Mars Rover Kata
 
+Research suggests that the original version of this problem was part
+of the Thoughtworks interview loop as far back as 2007.  I haven't
+been able to find an authoritative source, but the consensus view
+seems to be that the form was something like what follows below.
 
-##Packages
-###Main
-Just a quick executable to demonstrate the code running, printing out the start and end locations of each rover.
-Only demonstrates the example provided, you can find further examples inside /rover/rover_test.go.
-###Rover
-Contains the Rover struct and receiver functions for Rover behaviour, namely turn or move. 
-* Rovers cannot crash into each other if stopping on the same (X,Y)
-* Rovers cannot leave the boundaries provided through any direction
+## Problem
 
-###Parser
-Takes in a string and produces a slice of Rovers or an error. 
-* Rovers must be parsed in a valid state
-    * Not nil
-    * Within boundaries
-    * Has a valid Direction (North, East, South, West)
-    * Has at least one valid command (L, M, R)
-* If any rover produces an error, parsing will stop and return a nil slice and the error.
-* Expects exactly 2 Boundary values. Top right coordinates of zone (X, Y)
-* Expects exactly 3 Rover initialisation values, representing the Rover position.
-* Expects exactly 1 Rover commands string, which must not be empty.
+A squad of robotic rovers are to be landed by NASA on a plateau on Mars. 
+This plateau, which is curiously rectangular, must be navigated by the 
+rovers so that their on-board cameras can get a complete view of the 
+surrounding terrain to send back to Earth.
+
+A rover's position and location is represented by a combination of x 
+and y co-ordinates and a letter representing one of the four cardinal 
+compass points. The plateau is divided up into a grid to simplify 
+navigation. An example position might be 0, 0, N, which means the 
+rover is in the bottom left corner and facing North.
+
+In order to control a rover, NASA sends a simple string of letters. 
+The possible letters are 'L', 'R' and 'M'. 'L' and 'R' makes the 
+rover spin 90 degrees left or right respectively, without moving 
+from its current spot. 'M' means move forward one grid point, and 
+maintain the same heading.
+
+Assume that the square directly North from (x, y) is (x, y+1).
+
+### INPUT:
+
+The first line of input is the upper-right coordinates of the plateau, 
+the lower-left coordinates are assumed to be 0,0.
+
+The rest of the input is information pertaining to the rovers that have 
+been deployed. Each rover has two lines of input. The first line gives 
+the rover's position, and the second line is a series of instructions 
+telling the rover how to explore the plateau.  The position is made up 
+of two integers and a letter separated by spaces, corresponding to the 
+x and y co-ordinates and the rover's orientation.
+
+Each rover will be finished sequentially, which means that the second 
+rover won't start to move until the first one has finished moving.
+
+### OUTPUT:
+
+The output for each rover should be its final co-ordinates and heading.
+
+### EXAMPLE:
+
+##### Test Input:
+
+    5 5
+    1 2 N
+    LMLMLMLMM
+    3 3 E
+    MMRMMRMRRM
+
+##### Expected Output:
+
+    1 3 N
+    5 1 E
