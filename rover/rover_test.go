@@ -12,6 +12,36 @@ func TestRover_Explore(t *testing.T) {
 		expErr      error
 		expPosition *Position
 	}{
+		"example first rover explores": {
+			rover:&Rover{
+					Boundary: &Coordinate{X: 5, Y: 5},
+					Commands: "LMLMLMLMM",
+					Position: &Position{
+						Coordinate: Coordinate{X: 1, Y: 2},
+						Direction:  North,
+					},
+				},
+			expErr: nil,
+			expPosition: &Position{
+				Coordinate: Coordinate{1,3},
+				Direction:  North,
+			},
+		},
+		"example second rover explores": {
+			rover:&Rover{
+				Boundary: &Coordinate{X: 5, Y: 5},
+				Commands: "LLLLRRRR",
+				Position: &Position{
+					Coordinate: Coordinate{X: 3, Y: 3},
+					Direction:  West,
+				},
+			},
+			expErr: nil,
+			expPosition: &Position{
+				Coordinate: Coordinate{3,3},
+				Direction:  West,
+			},
+		},
 		"explore to boundary edge diagonally south to north": {
 			rover: &Rover{
 				Commands: "RMLMRMLMR",
