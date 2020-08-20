@@ -84,5 +84,22 @@ func (r *Rover) move() error {
 }
 
 func (r *Rover) turn(i Instruction) error {
+	switch i {
+	case TurnLeft:
+		newPos := r.Position.Direction - 1
+		if newPos >= 1 {
+			r.Position.Direction = newPos
+		} else {
+			r.Position.Direction = West
+		}
+	case TurnRight:
+		r.Position.Direction += 1
+		if r.Position.Direction > 4 {
+			r.Position.Direction = North
+		}
+	default:
+		return fmt.Errorf("unknown instruction passed to update direction %v", i)
+	}
+
 	return nil
 }
