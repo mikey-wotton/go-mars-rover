@@ -390,7 +390,6 @@ func TestRover_Valid(t *testing.T) {
 			},
 			expErr: fmt.Errorf("rover provided unknown Instruction{%d}", Instruction('X')),
 		},
-
 	}
 
 	for desc, test := range tests {
