@@ -30,16 +30,16 @@ func TestRover_Explore(t *testing.T) {
 		"example second rover explores": {
 			rover:&Rover{
 				Boundary: &Coordinate{X: 5, Y: 5},
-				Commands: "LLLLRRRR",
+				Commands: "MMRMMRMRRM",
 				Position: &Position{
 					Coordinate: Coordinate{X: 3, Y: 3},
-					Direction:  West,
+					Direction:  East,
 				},
 			},
 			expErr: nil,
 			expPosition: &Position{
-				Coordinate: Coordinate{3,3},
-				Direction:  West,
+				Coordinate: Coordinate{5,1},
+				Direction:  East,
 			},
 		},
 		"explore to boundary edge diagonally south to north": {
