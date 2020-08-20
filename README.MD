@@ -1,10 +1,4 @@
-# The Mars Rover Kata
-
-Research suggests that the original version of this problem was part
-of the Thoughtworks interview loop as far back as 2007.  I haven't
-been able to find an authoritative source, but the consensus view
-seems to be that the form was something like what follows below.
-
+# The Mars Rover 
 ## Problem
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. 
