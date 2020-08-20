@@ -23,7 +23,46 @@ const (
 )
 
 func ParseInstructions(input string) (rover.Rovers, error) {
-	return nil, nil
+	scanner := bufio.NewScanner(strings.NewReader(input))
+
+	if !scanner.Scan() {
+		if err := scanner.Err(); err != nil {
+			return nil, err
+		}
+
+		return nil, ErrEmptyInput
+	}
+	boundary, err := parseBoundary(scanner)
+	if err != nil {
+		return nil, err
+	}
+
+	rovers := make(rover.Rovers, 0)
+	for scanner.Scan() {
+		position, err := parseRoverPosition(scanner)
+		if err != nil {
+			return nil, err
+		}
+
+		if !scanner.Scan() {
+			return nil, ErrRoverWithoutInstructions
+		}
+		instructions := scanner.Text()
+
+		rover := &rover.Rover{
+			Boundary: boundary,
+			Commands: instructions,
+			Position: position,
+		}
+
+		if err := rover.Valid(); err != nil {
+			return nil, err
+		}
+
+		rovers = append(rovers, rover)
+	}
+
+	return rovers, nil
 }
 
 func parseBoundary(scanner *bufio.Scanner) (*rover.Coordinate, error) {
