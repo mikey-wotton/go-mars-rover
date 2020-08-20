@@ -80,6 +80,35 @@ func (r *Rover) Valid() error {
 }
 
 func (r *Rover) move() error {
+	switch r.Position.Direction {
+	case North:
+		if r.Position.Y+1 <= r.Boundary.Y {
+			r.Position.Y += 1
+		} else {
+			return ErrBoundaryNorth
+		}
+	case East:
+		if r.Position.X+1 <= r.Boundary.X {
+			r.Position.X += 1
+		} else {
+			return ErrBoundaryEast
+		}
+	case South:
+		if r.Position.Y-1 >= 0 {
+			r.Position.Y -= 1
+		} else {
+			return ErrBoundarySouth
+		}
+	case West:
+		if r.Position.X-1 >= 0 {
+			r.Position.X -= 1
+		} else {
+			return ErrBoundaryWest
+		}
+	default:
+		return errUnknownDirection(r.Position.Direction)
+	}
+
 	return nil
 }
 
