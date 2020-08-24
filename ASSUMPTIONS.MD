@@ -2,6 +2,8 @@
 To run the exe:
 ```
 cd go-mars-rover/
+go get ./...
+go generate ./...
 go build
 go-mars-rover.exe
 ```
@@ -9,11 +11,14 @@ To run the code:
 ```
 cd go-mars-rover/
 go get ./...
+go generate ./...
 go run main.go
 ```
 To run unit tests:
 ```
 cd go-mars-rover/
+go get ./...
+go generate ./...
 go test ./...
 ```
 To generate and view code coverage:
